@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator</title>
+</head>
+<body>
+
+<form id="bmiForm">
+  <label for="weight">น้ำหนัก (kg):</label>
+  <input type="text" id="weight" name="weight" required>
+  <br>
+  <label for="height">ส่วนสูง (cm):</label>
+  <input type="text" id="height" name="height" required>
+  <br>
+  <button type="button" onclick="calculateBMI()">คำนวณ BMI</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+  function calculateBMI() {
+    var weightInput = document.getElementById("weight").value;
+    var heightInput = document.getElementById("height").value;
+
+    if (weightInput === "" || heightInput === "") {
+      alert("กรุณากรอกข้อมูลทั้งสองช่อง");
+      return;
+    }
+
+    var weight = parseFloat(weightInput);
+    var height = parseFloat(heightInput) / 100;
+
+    var bmi = weight / (height * height);
+    var resultElement = document.getElementById("result");
+
+    resultElement.innerHTML = "<h2>Your BMI is: " + bmi.toFixed(2) + " kg/m<sup>2</sup></h2>";
+
+    if (bmi < 18.5) {
+      resultElement.innerHTML += "<p>ผอม</p>";
+    } else if (bmi >= 18.5 && bmi <= 22.90) {
+      resultElement.innerHTML += "<p>ปกติ</p>";
+    } else if (bmi >= 23 && bmi <= 24.90) {
+      resultElement.innerHTML += "<p>ท้วม</p>";
+    } else if (bmi >= 25 && bmi <= 29.90) {
+      resultElement.innerHTML += "<p>อ้วน</p>";
+    } else {
+      resultElement.innerHTML += "<p>อ้วนมาก</p>";
+    }
+  }
+</script>
+
+</body>
+</html>
